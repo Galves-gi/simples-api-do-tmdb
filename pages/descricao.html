@@ -45,6 +45,14 @@
     <!-- corpo -->
     <main class="container h-100 d-flex flex-column justify-content-center align-items-center position-relative">
 
+        <h1 class="filme-titulo"></h1>
+        <img class="filme-img" />
+
+        <p class="filme-descricao"></p>
+        <p class="filme-avaliacao"></p>
+        <p class="filme-data"></p>
+
+
         <section class="row w-100 mt-4">
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
                 <img src="/assets/demon slayer.jpeg" alt="" srcset="" class="filme-img">
@@ -52,9 +60,14 @@
 
             <div class="col-12 col-md-6">
                 <div class="d-flex justify-content-start align-content-center gap-3">
+
                     <h2 class="align-self-start text-light filme-titulo">titulo</h2>
-                    <h5 class="text-light filme-avaliacao">10<span><i
-                                class="bi bi-star-fill text-warning me-3"></i></span></h5>
+
+                    <h5 class="text-light filme-avaliacao">10
+
+                        <span><i class="bi bi-star-fill text-warning me-3"></i></span>
+
+                    </h5>
                 </div>
 
                 <data value="" class="text-light filme-data"><span>Data de lançamento: </span>20/02/2222</data>
@@ -71,39 +84,16 @@
         <!-- cards de filmes -->
         <h2 class="text-start w-100 text-info">Sugestão de Filmes:</h2>
 
-        <section class="container text-center my-5">
+        <section class="container text-center mb-5 mt-3">
 
-            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3">
-                <div class="col">
-                    <img src="/assets/demon slayer.jpeg" alt="" srcset="" class="">
-                </div>
-                <div class="col">
-                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
-                </div>
-                <div class="col">
-                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
-                </div>
-                <div class="col">
-                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
-                </div>
-                <div class="col">
-                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
-                </div>
-                <div class="col">
-                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
-                </div>
-                <div class="col">
-                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
-                </div>
-                <div class="col">
-                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
-                </div>
-                <div class="col">
-                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
-                </div>
-                <div class="col">
-                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
-                </div>
+            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3" id="containerCardPadrao">
+
+                <!-- <div class="col">
+                    <a href="]#">
+                        <img src="/assets/demon slayer.jpeg" alt="" srcset="" class="">
+                    </a>
+                </div> -->
+
             </div>
 
         </section>
@@ -114,7 +104,7 @@
         <h5 class="p-0 m-0">Todos os direitos reservados!</h5>
     </footer>
 
-
+    <script type="module" src="/js/index.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

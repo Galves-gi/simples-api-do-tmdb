@@ -1,0 +1,216 @@
+const TMDB_BASE_URL = 'https://api.themoviedb.org/3'
+const TMDB_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2ZjZDIwOTZmMGFjOTQzOWU2ODI2YmI1ZGQ4NGI4OCIsIm5iZiI6MTc2MjE3Njk0MC45MTgwMDAyLCJzdWIiOiI2OTA4YWZhYzIyZTgwODcyNmE1OTg2M2IiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.LdXGLFT_U_qczlt2Uk5LvSGjUvqL-_5_EJ1gEKdpjoM'
+
+
+/* montar a url das rotas */
+const cabecalho ={
+    'Authorization': `Bearer ${TMDB_TOKEN}`,
+    'Content-Type': 'application/json;charset=utf-8'
+}
+
+async function montarUrl(caminho, params = {}) {
+
+  const parametrosCompletos = {
+    language: "pt-BR",
+    include_adult: false,
+    append_to_response: 'videos',
+    ...params
+  };
+
+  const url = new URL(`${TMDB_BASE_URL}${caminho}`);
+
+  Object.entries(parametrosCompletos).forEach(([k, v]) =>
+    url.searchParams.append(k, v)
+  );
+
+  const resultado = await fetch(url.toString(), { headers: cabecalho });
+
+  if (!resultado.ok) {
+    throw new Error(`TMDB Error ${resultado.status} ${resultado.statusText}`);
+  }
+
+  return resultado.json();
+}
+
+
+/* rotas */
+/* url lançamentos em cartaz */
+async function getLancamentoCartaz(page = 1){
+    return montarUrl('/movie/now_playing' , { page, region: "BR" })
+}
+
+/* url futuro lançamentos */
+async function getFuturoLancamento(page = 1){
+    return montarUrl('/movie/upcoming', { page, 'primary_release_date.gte': '2025-11-11', region: "BR" })
+}
+
+/* url mais avaliado*/
+async function getMaisAvaliados(page = 1){
+    return montarUrl('/movie/top_rated', { page })
+}
+
+/* url pesquisar */
+async function getPesquisar(query, page = 1) {
+  if (!query) return { results: [] };
+  return montarUrl('/search/movie${query}', { query, page });
+}
+/* async function getPesquisar(pesquisa, page = 1){
+    return montarUrl('/search/movie', {pesquisa, page, include_adult: false })
+} */
+
+/* url Mais detalhes */
+async function getMaisDetalhes(id){
+    return montarUrl('/movie/${id}',{ append_to_response: 'videos' })
+}
+
+
+/* pagina index */
+const TMDB_IMG = 'https://image.tmdb.org/t/p/w500/'
+
+const containerLancamentoCartaz = document.getElementById('containerCardCarrosselLancamentoCartaz');
+
+const containerFuturoLancamento = document.getElementById('containerCardCarrosselFuturoLancamento');
+
+const containerCardPadrao = document.getElementById('containerCardPadrao');
+
+
+function criarCardCarrossel(filme) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    card.innerHTML = `
+        <a href="./pages/descricao.html?id=${filme.id}">
+            <img src="${TMDB_IMG}${filme.poster_path}" alt="${filme.title}">
+        </a>
+    `
+    return card
+}
+
+function criarCardPadrao(filme) {
+    const cardPadrao = document.createElement('div');
+    cardPadrao.classList.add('col');
+
+    cardPadrao.innerHTML = `
+        <a href="./pages/descricao.html?id=${filme.id}">
+            <img src="${TMDB_IMG}${filme.poster_path}" alt="${filme.title}">
+        </a>
+    `
+    return cardPadrao
+}
+// funcão reutilizada
+async function renderizarLista({
+  container,
+  chamarRota,
+  createCardFunction = criarCardPadrao,
+  limit = 12
+}) {
+  container.innerHTML = '<p>Carregando...</p>';
+
+  try {
+    const dados = await chamarRota();
+    const lista = dados.results?.slice(0, limit);
+
+    container.innerHTML = '';
+
+    if (!lista.length) {
+      container.innerHTML = '<p>Nenhum filme encontrado.</p>';
+      return;
+    }
+
+    lista.forEach(filme => {
+      container.appendChild(createCardFunction(filme));
+    });
+
+  } catch (err) {
+    container.innerHTML = `<p>Erro ao carregar: ${err.message}</p>`;
+    console.error(err);
+  }
+}
+//lancamento em cartaz
+renderizarLista({
+  container: containerLancamentoCartaz,
+  chamarRota: getLancamentoCartaz,
+  createCardFunction: criarCardCarrossel,
+  limit: 12
+});
+//futuro lancamento
+renderizarLista({
+  container: containerFuturoLancamento,
+  chamarRota: getFuturoLancamento,
+  createCardFunction: criarCardCarrossel,
+  limit: 12
+});
+//mais avaliado
+renderizarLista({
+  container: containerCardPadrao,
+  chamarRota: getMaisAvaliados,
+  createCardFunction: criarCardPadrao,
+  limit: 15
+});
+
+
+/* Pesquisar */
+const pesquisarInput = document.getElementById('pesquisar-input');
+const pesquisarBotao = document.getElementById('pesquisar-botao');
+const mensagemEl = document.getElementById('mensagem');
+const container = document.getElementById('containerCardPesquisa');
+
+const params = new URLSearchParams(window.location.search);
+const termo = params.get('buscar');
+
+if (!termo) {
+  mensagemEl.textContent = 'Nenhum termo de pesquisa fornecido.';
+  container.innerHTML = '<p class="text-light text-center">Digite algo para pesquisar.</p>';
+} else {
+  mensagemEl.textContent = `Resultados para: "${termo}"`;
+
+  renderizarLista({
+    container,
+    chamarRota: () => getPesquisar(termo, 1),
+    createCardFunction: criarCardPadrao,
+    limit: null,
+    mensagemEl,
+  });
+}
+
+/* pagina detalhes */
+const URL_VIDEO = 'https://www.youtube.com/watch?v='
+
+
+const tituloEl = document.querySelector(".filme-titulo");
+const descEl   = document.querySelector(".filme-descricao");
+const avalEl   = document.querySelector(".filme-avaliacao");
+const imgEl    = document.querySelector(".filme-img");
+const dataEl   = document.querySelector(".filme-data");
+
+async function iniciarDetalhes() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (!id) {
+    console.log("ID não encontrado");
+    return;
+  }
+
+  try {
+    const filme = await getMaisDetalhes(id);
+
+    tituloEl.textContent = filme.title ?? "Sem título";
+    descEl.textContent   = filme.overview ?? "Sem descrição";
+    avalEl.textContent   = filme.vote_average 
+      ? `Avaliação: ${filme.vote_average.toFixed(1)}`
+      : "Sem avaliação";
+
+    imgEl.src = `https://image.tmdb.org/t/p/w500${filme.poster_path}`;
+    imgEl.alt = filme.title;
+
+    dataEl.textContent = filme.release_date
+      ? `Data de lançamento: ${filme.release_date}`
+      : "Sem data";
+
+  } catch (error) {
+    console.error("Erro ao carregar detalhes", error);
+  }
+}
+
+iniciarDetalhes();
