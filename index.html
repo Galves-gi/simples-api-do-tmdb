@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title>Mooviix - Filmes</title>
+</head>
+
+<body>
+
+    <!-- cabeçalho -->
+    <header class="navbar navbar-expand-lg position-relative">
+        <div class="container-fluid p-md-2 p-2">
+
+            <a class="navbar-brand" href="/index.html">
+                <img src="/assets/logo.png" alt="" srcset="" class="logo">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <nav class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex ms-auto p-sm-1" role="search">
+                    <input class="form-control me-2 w-sm-100" type="search" placeholder="Pesquisar por filmes..."
+                        aria-label="Search"/>
+                    <button class="rounded vermelho" type="submit">Buscar</button>
+                </form>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- carroussel -->
+
+    <figure id="carouselExampleInterval" class="carousel slide m-0 p-0" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <img src="/assets/batman.jpg" class="d-block w-100 " alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="/assets/deapool.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/assets/motoqueiro fantasma.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/assets/venom.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </figure>
+
+    <!-- corpo -->
+    <main class="container h-100 d-flex flex-column justify-content-center align-items-center position-relative">
+        <h2 class="text-start w-100 text-info">Em cartaz</h2>
+        <!-- cards carousel-->
+        <section class="carousel-container my-2">
+            <!-- 
+            <button class="nav prev" id="prevBtn">&#10094;</button> -->
+
+            <div class="carousel">
+                <div class="card">
+                    <a href="#"><img src="/assets/demon slayer.jpeg" alt=""></a>
+                </div>
+
+                <div class="card">
+                    <img src="#" alt="">
+                </div>
+
+                <div class="card">
+                    <img src="https://placehold.co/300x180" alt="">
+                </div>
+
+                <div class="card">
+                    <img src="https://placehold.co/300x180" alt="">
+                </div>
+
+                <div class="card">
+                    <img src="https://placehold.co/300x180" alt="">
+                </div>
+
+                <div class="card">
+                    <img src="https://placehold.co/300x180" alt="">
+                </div>
+            </div>
+
+            <!--         <button class="nav next" id="nextBtn">&#10095;</button> -->
+
+        </section>
+
+
+         <!-- cards carousel-->
+        <h2 class="text-start w-100 text-info">Futuro lançamento</h2>
+        <section class="carousel-container my-2">
+            <!-- 
+            <button class="nav prev" id="prevBtn">&#10094;</button> -->
+
+            <div class="carousel">
+                <div class="card">
+                    <a href="#"><img src="/assets/demon slayer.jpeg" alt=""></a>
+                </div>
+
+                <div class="card">
+                    <img src="#" alt="">
+                </div>
+
+                <div class="card">
+                    <img src="https://placehold.co/300x180" alt="">
+                </div>
+
+                <div class="card">
+                    <img src="https://placehold.co/300x180" alt="">
+                </div>
+
+                <div class="card">
+                    <img src="https://placehold.co/300x180" alt="">
+                </div>
+
+                <div class="card">
+                    <img src="https://placehold.co/300x180" alt="">
+                </div>
+            </div>
+
+            <!--         <button class="nav next" id="nextBtn">&#10095;</button> -->
+
+        </section>
+
+        <!-- cards normais -->
+        <h2 class="text-start w-100 text-info">Mais Avaliado</h2>
+        <section class="container text-center my-5">
+
+            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3">
+                <div class="col">
+                    <img src="/assets/demon slayer.jpeg" alt="" srcset="" class="">
+                </div>
+                <div class="col">
+                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
+                </div>
+                <div class="col">
+                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
+                </div>
+                <div class="col">
+                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
+                </div>
+                <div class="col">
+                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
+                </div>
+                <div class="col">
+                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
+                </div>
+                <div class="col">
+                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
+                </div>
+                <div class="col">
+                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
+                </div>
+                <div class="col">
+                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
+                </div>
+                <div class="col">
+                    <img src="/assets/demon slayer.jpeg" alt="" srcset="">
+                </div>
+            </div>
+
+        </section>
+        
+    </main>
+
+    <footer class="p-0 m-0">
+        <h5 class="p-0 m-0">Todos os direitos reservados!</h5>
+    </footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

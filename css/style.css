@@ -1,0 +1,151 @@
+/* cores */
+.bg-azul-claro {
+    color: #02c8fc;
+}
+
+.bg-azul-escuro,
+body {
+    background-color: #010d39;
+}
+
+.vermelho {
+    color: white;
+    background-color: #c22f98;
+}
+
+footer {
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+/* cabeçalho */
+header {
+    width: 100%;
+    background-color: black;
+    z-index: 30;
+}
+
+header .logo {
+    width: 10em;
+    z-index: 5;
+}
+
+.form-control {
+    width: 40dvw;
+}
+
+/* carrossel figure*/
+.carousel-item,
+.carousel-inner,
+.carousel,
+.carousel-control-prev,
+.carousel-control-next,
+.active {
+    height: 90dvh;
+    z-index: -2;
+}
+
+
+.carousel-item>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* card carousel */
+.carousel-container {
+    position: relative;
+    width: 97%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.carousel {
+    width: 100%;
+    height: auto;
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.card {
+    flex: 0 0 15.063em;
+    /* flex: 0 0 clamp(10.56em, 14vw, 15.063em); */
+    width: 11em;
+    height: 45dvh;
+    scroll-snap-align: start;
+    background-color: transparent;
+    transition: transform .25s ease;
+
+}
+
+.card img,
+.col img {
+    max-width: 100%;
+    height: 45dvh;
+    object-fit: cover;
+}
+
+.card:hover,
+.col:hover {
+    transform: scale(1.06);
+    cursor: pointer;
+}
+
+.card:hover img,
+.col:hover img {
+    filter: brightness(1.05);
+}
+
+/* demais card com col */
+.col {
+    height: 45dvh;
+}
+
+
+/*pagina resultado da pesquisa */
+.resultado-pesquisa {
+    background-color: black;
+    min-height: 100dvh;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+}
+
+.resultado-pesquisa_voltar {
+    position: absolute;
+    top: 2em;
+    left: 2em;
+    color: white;
+    text-decoration: none;
+}
+
+.aviso_filme {
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* pagina descrição */
+.filme-video, video {
+    
+    max-width: 50vw;
+    max-height: 50dvh;
+    object-fit: cover;
+
+    margin: 5em 0 5em 0; 
+}
