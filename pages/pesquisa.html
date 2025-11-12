@@ -33,9 +33,12 @@
             <nav class="collapse navbar-collapse" id="navbarSupportedContent">
                 <form class="d-flex ms-auto p-sm-1" id="pesquisa-form" role="search" action="pesquisa.html"
                     method="get">
+
                     <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="buscar" type="text"
-                        placeholder="Pesquisar por filmes..." aria-label="Search" />
+                        placeholder="Pesquisar por filmes..." aria-label="Search" required />
+
                     <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
+                    
                 </form>
 
             </nav>
@@ -53,11 +56,9 @@
 
         <section class="container text-center mb-5 mt-5 ">
 
-            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3 mt-3"
+            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3 mt-3 text-center text-danger w-100"
                 id="containerCardPesquisa">
-
-                <div id="mensagem" class="aviso_filme d-flex justify-content-center align-items-center"></div>
-
+                    
             </div>
 
         </section>
@@ -66,7 +67,7 @@
 
     </main>
 
-    <script type="module" src="/js/index.js"></script>
+    <script type="module" src="/js/pesquisa.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

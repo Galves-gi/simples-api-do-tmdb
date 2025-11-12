@@ -50,12 +50,18 @@ async function getMaisAvaliados(page = 1){
 }
 
 /* url pesquisar */
-async function getPesquisar(query, page = 1) {
-  if (!query) return { results: [] };
-  return montarUrl('/search/movie${query}', { query, page });
-}
-/* async function getPesquisar(pesquisa, page = 1){
-    return montarUrl('/search/movie', {pesquisa, page, include_adult: false })
+/* async function getPesquisar(valorDigitado, page = 1) {
+    try {
+        const resposta = await montarUrl(`/search/movie?query=${valorDigitado}`, {page });
+
+        return resposta.results
+
+    } catch (error) {
+        console.log(error);
+        
+        return { results: [] };
+    }
+
 } */
 
 /* url Mais detalhes */
@@ -86,7 +92,7 @@ function criarCardCarrossel(filme) {
     return card
 }
 
-function criarCardPadrao(filme) {
+export function criarCardPadrao(filme) {
     const cardPadrao = document.createElement('div');
     cardPadrao.classList.add('col');
 
@@ -149,29 +155,7 @@ renderizarLista({
 });
 
 
-/* Pesquisar */
-const pesquisarInput = document.getElementById('pesquisar-input');
-const pesquisarBotao = document.getElementById('pesquisar-botao');
-const mensagemEl = document.getElementById('mensagem');
-const container = document.getElementById('containerCardPesquisa');
 
-const params = new URLSearchParams(window.location.search);
-const termo = params.get('buscar');
-
-if (!termo) {
-  mensagemEl.textContent = 'Nenhum termo de pesquisa fornecido.';
-  container.innerHTML = '<p class="text-light text-center">Digite algo para pesquisar.</p>';
-} else {
-  mensagemEl.textContent = `Resultados para: "${termo}"`;
-
-  renderizarLista({
-    container,
-    chamarRota: () => getPesquisar(termo, 1),
-    createCardFunction: criarCardPadrao,
-    limit: null,
-    mensagemEl,
-  });
-}
 
 /* pagina detalhes */
 const URL_VIDEO = 'https://www.youtube.com/watch?v='
