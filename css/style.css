@@ -4,15 +4,16 @@ body {
     background-color: #010d39;
 }
 
-.vermelho {
-    color: white;
-    background-color: #c22f98;
-}
-
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+h1,h2,h3{
+    background-image: linear-gradient(to right,#92c9c6, #aaf368);
+     -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 /* cabeçalho */
@@ -25,6 +26,21 @@ header {
 header .logo {
     width: 10em;
     z-index: 5;
+}
+
+#pesquisar-botao {
+    color: white;
+    background-color: #c22f98;
+    border: 5px solid #e8217e;
+
+    &:hover {
+        background-color: #e8217e;
+        border: 5px solid #c22f98;
+    }
+}
+.bi{
+    color: #92c9c6;
+    font-size: 1.8em;
 }
 
 /* carrossel de imagens */
@@ -122,14 +138,16 @@ header .logo {
 }
 
 /* pagina descrição */
+.filme-img {
+    width: 13em;
+    height: 45dvh;
+}
+
 .filme-video,
 video {
-
-    max-width: 50vw;
-    max-height: 50dvh;
+    width: 95%;
     object-fit: cover;
-
-    margin: 5em 0 5em 0;
+    margin: 2em 0 3em 0;
 }
 
 /* rodape */
@@ -154,4 +172,17 @@ footer {
     .active {
         max-height: 90dvh;
     }
+
+    /* pagina descrição */
+    .filme-img {
+        width: 15.063em;
+    }
+
+    .filme-video,
+    video {
+        max-width: 50vw;
+        max-height: 50dvh;
+        margin: 3em 0 3em 0;
+    }
+
 }

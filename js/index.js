@@ -65,9 +65,9 @@ async function getMaisAvaliados(page = 1){
 } */
 
 /* url Mais detalhes */
-async function getMaisDetalhes(id){
+/* async function getMaisDetalhes(id){
     return montarUrl('/movie/${id}',{ append_to_response: 'videos' })
-}
+} */
 
 
 /* pagina index */
@@ -153,48 +153,3 @@ renderizarLista({
   createCardFunction: criarCardPadrao,
   limit: 15
 });
-
-
-
-
-/* pagina detalhes */
-const URL_VIDEO = 'https://www.youtube.com/watch?v='
-
-
-const tituloEl = document.querySelector(".filme-titulo");
-const descEl   = document.querySelector(".filme-descricao");
-const avalEl   = document.querySelector(".filme-avaliacao");
-const imgEl    = document.querySelector(".filme-img");
-const dataEl   = document.querySelector(".filme-data");
-
-async function iniciarDetalhes() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-
-  if (!id) {
-    console.log("ID não encontrado");
-    return;
-  }
-
-  try {
-    const filme = await getMaisDetalhes(id);
-
-    tituloEl.textContent = filme.title ?? "Sem título";
-    descEl.textContent   = filme.overview ?? "Sem descrição";
-    avalEl.textContent   = filme.vote_average 
-      ? `Avaliação: ${filme.vote_average.toFixed(1)}`
-      : "Sem avaliação";
-
-    imgEl.src = `https://image.tmdb.org/t/p/w500${filme.poster_path}`;
-    imgEl.alt = filme.title;
-
-    dataEl.textContent = filme.release_date
-      ? `Data de lançamento: ${filme.release_date}`
-      : "Sem data";
-
-  } catch (error) {
-    console.error("Erro ao carregar detalhes", error);
-  }
-}
-
-iniciarDetalhes();
