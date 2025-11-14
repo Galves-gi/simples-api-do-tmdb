@@ -41,7 +41,7 @@ async function getLancamentoCartaz(page = 1){
 
 /* url futuro lançamentos */
 async function getFuturoLancamento(page = 1){
-    return montarUrl('/movie/upcoming', { page, 'primary_release_date.gte': '2025-11-11', region: "BR" })
+    return montarUrl('/movie/upcoming', { page, 'primary_release_date.gte': '2025-11-14', region: "BR" })
 }
 
 /* url mais avaliado*/
