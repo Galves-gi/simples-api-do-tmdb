@@ -92,7 +92,7 @@ function criarCardCarrossel(filme) {
     return card
 }
 
-export function criarCardPadrao(filme) {
+function criarCardPadrao(filme) {
     const cardPadrao = document.createElement('div');
     cardPadrao.classList.add('col');
 
@@ -108,13 +108,13 @@ async function renderizarLista({
   container,
   chamarRota,
   createCardFunction = criarCardPadrao,
-  limit = 12
+  //limit = 12
 }) {
   container.innerHTML = '<p>Carregando...</p>';
 
   try {
     const dados = await chamarRota();
-    const lista = dados.results?.slice(0, limit);
+    const lista = dados.results;
 
     container.innerHTML = '';
 

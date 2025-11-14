@@ -40,11 +40,15 @@ const TMDB_IMG = 'https://image.tmdb.org/t/p/w500'
 const URL_VIDEO = 'https://www.youtube.com/embed/'
 
 const filmeImg = document.querySelector(".filme-img")
-const descricaoTitulo = document.querySelector(".filme-titulo")
+const filmeTitulo = document.querySelector(".filme-titulo")
 const filmeAvaliacao = document.querySelector(".filme-avaliacao")
+const filmeStatus = document.querySelector(".filme-status")
 const filmeData = document.querySelector(".filme-data")
-const descricao = document.querySelector(".filme-descricao")
-const FilmeVideo = document.querySelector(".filme-video")
+const filmeDuracao = document.querySelector(".filme-duracao")
+const filmeBreveCitacao = document.querySelector(".filme-breveCitacao")
+const filmeDescricao = document.querySelector(".filme-descricao")
+const filmeGenero = document.querySelector(".filme-genero")
+const filmeVideo = document.querySelector(".filme-video")
 
 
 const urlParams = new URLSearchParams(window.location.search)
@@ -56,30 +60,50 @@ async function getMaisDetalhes(id){
     try {
         const resposta = await montarUrl(`/movie/${id}`,{ append_to_response: 'videos' })
 
+        // imagem
         const imgApi = resposta.poster_path
 
         filmeImg.src = (`${TMDB_IMG}${imgApi}`)
-       
-        descricaoTitulo.innerHTML = resposta.title
 
+       // titulo
+        filmeTitulo.innerHTML = resposta.title
+        // status
+        //filmeStatus.innerHTML = resposta.status
+
+        // data
         const data = new Date(resposta.release_date)
         const dataFormatada = data.toLocaleDateString('pt-BR')
         filmeData.innerHTML = dataFormatada
         
-
-        filmeAvaliacao.innerHTML = resposta.popularity
-        descricao.innerHTML = resposta.overview
-
+        // avaliacao
+        filmeAvaliacao.innerHTML = resposta.vote_average.toFixed(2)
         
-        const videoKey = resposta.videos.results[0].key 
+        // tempo de duracao
+        const minutos = resposta.runtime;
+        const horas = Math.floor(minutos / 60);
+        const min = minutos % 60;
+
+        const duracaoFormatado = `${horas}h ${min}m`;
+
+        filmeDuracao.innerHTML = duracaoFormatado
+
+        // descricao
+        filmeBreveCitacao.innerHTML = resposta.tagline
+        filmeDescricao.innerHTML = resposta.overview
+
+        //genero
+        const genero = resposta.genres
+        console.log(genero);
+        
+        filmeGenero.innerHTML = genero.map(nomeFilme => nomeFilme.name).join(", ")
+
+
+        // video
+        const videoKey = resposta?.videos?.results?.[0]?.key
 
         if (videoKey) {
-          FilmeVideo.src = (`${URL_VIDEO}${videoKey}`)
-          FilmeVideo.style.display = "block"
-        } else {
-          console.log("passou aqui");
-          
-          FilmeVideo.style.display = "none"
+          filmeVideo.classList.remove("d-none")
+          filmeVideo.src = (`${URL_VIDEO}${videoKey}`)
         }
 
         

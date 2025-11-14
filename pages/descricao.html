@@ -32,9 +32,9 @@
             </button>
 
             <nav class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-auto p-sm-1" id="pesquisa-form" role="search" action="/pages/pesquisa.html"
+                <form class="d-flex ms-auto p-sm-1" id="pesquisa-form" role="search" action="pesquisa.html"
                     method="get">
-                    <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="buscar" type="text"
+                    <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="search" type="text"
                         placeholder="Pesquisar por filmes..." aria-label="Search" />
                     <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
                 </form>
@@ -44,9 +44,9 @@
     </header>
 
     <!-- corpo -->
-    <main class="container h-100 d-flex flex-column justify-content-center align-items-center position-relative">
+    <main class="container d-flex flex-column justify-content-center align-items-center position-relative">
 
-        <section class="row w-100 mt-4">
+        <section class="row w-100 mt-4 h-100">
             <div class="col-12 col-md-6 d-flex justify-content-center align-items-center mb-5">
                 <img src="/assets/favicon.png" alt="" srcset="" class="filme-img">
             </div>
@@ -55,46 +55,48 @@
                 <div class="d-flex justify-content-start align-content-center gap-3 flex-md-row flex-column">
 
                     <h2 class="align-self-start text-light filme-titulo">titulo do filme</h2>
+                </div>
 
+                <div class="w-100 w-md-75 d-flex justify-content-start align-items-center mb-1 gap-3 gap-md-4">
                     <div class="d-flex justify-content-start align-items-center">
-                        <h5 class="text-light filme-avaliacao text-center m-0 p-0">1000</h5>
-                        <span><i class="bi bi-star-fill text-warning me-3"></i></span>
+                        <span><i class="bi bi-star-fill text-warning m-1"></i></span>
+                        <h5 class="text-light filme-avaliacao text-center m-0 p-0"></h5>
                     </div>
+
+                    <div class="d-flex justify-content-start align-items-center ">
+                        <!-- <h5 class="text-light">Data de <span class="filme-status"></span> </h5> -->
+                        <data class="text-light filme-data">20/02/2222</data>
+                    </div>
+
+                    <span class="filme-duracao text-light w-25"> </span>
                 </div>
 
-                <div class="d-flex justify-content-start align-items-center mb-1">
-                    <span class="text-light">Data de lançamento: </span>
-                    <data class="text-light filme-data">20/02/2222</data>
-                </div>
+                <blockquote class="filme-breveCitacao text-light mt-2"></blockquote>
+                <p class="text-light filme-descricao h-auto "><span>Descrição:</span><br></p>
+                <!-- genero -->
+                <p class="text-light">Gênero:<span class="filme-genero"></span></p>
 
-                <p class="text-light filme-descricao h-100"><span>Descrição:</span><br></p>
             </div>
         </section>
 
-        <iframe width="560" height="315" src="" class="filme-video" title="YouTube video player" frameborder="0"
+        <iframe width="560" height="315" src="" class="filme-video d-none" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
         <!-- cards de filmes -->
         <!-- <h2 class="text-start w-100" style="color:#aaf368;">Sugestão de Filmes:</h2> -->
 
-        <section class="container text-center mb-5 mt-3">
+<!--         <section class="container text-center mb-5 mt-3">
 
             <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3" id="containerCardPadrao">
 
-                <!-- <div class="col">
-                    <a href="]#">
-                        <img src="/assets/demon slayer.jpeg" alt="" srcset="" class="">
-                    </a>
-                </div> -->
-
             </div>
 
-        </section>
+        </section> -->
 
     </main>
 
-    <footer class="p-0 m-0">
+    <footer class="p-0 ">
         <h5 class="p-0 m-0">Todos os direitos reservados!</h5>
     </footer>
 

@@ -55,9 +55,11 @@ function criarCardPadrao(filme) {
     const cardPadrao = document.createElement('div');
     cardPadrao.classList.add('col');
 
+    const caminhoImg = filme.poster_path ? `${TMDB_IMG}${filme.poster_path}` : "/assets/favicon.png"
+
     cardPadrao.innerHTML = `
         <a href="./descricao.html?id=${filme.id}">
-            <img src="${TMDB_IMG}${filme.poster_path}" alt="${filme.title}">
+            <img src="${caminhoImg}" alt="${filme.title}">
         </a>
     `
     return cardPadrao
@@ -69,7 +71,50 @@ const pesquisarInput = document.getElementById('pesquisar-input');
 
 const containerCardPesquisa = document.getElementById('containerCardPesquisa');
 
+// valor da url
+async function pesquisarComUrl() {
+  const urlParams = new URLSearchParams(window.location.search)
 
+  const valorUrl = urlParams.get("search")
+
+  if (!valorUrl) {
+  containerCardPesquisa.innerHTML = '<p class="aviso">Digite o nome de um filme</p>';
+  return;
+  }
+
+  containerCardPesquisa.innerHTML = '<p class="aviso">Carregando...</p>';
+
+  const tempoLimite = setTimeout(() => {
+  containerCardPesquisa.innerHTML = `<p class="aviso">Tempo de busca excedido (30s).</p>`;
+  }, 3000);
+
+  try {
+    const resultadoPesquisa = await getPesquisar(valorUrl);
+
+    clearTimeout(tempoLimite);
+
+    if (!resultadoPesquisa || resultadoPesquisa.length === 0) {
+    containerCardPesquisa.innerHTML = `<p class="aviso">Nenhum filme encontrado!</p>`;
+    return;
+    }
+
+    // 🧱 Exibe os cards normalmente
+    containerCardPesquisa.innerHTML = '';
+    resultadoPesquisa.forEach(filme => {
+    const card = criarCardPadrao(filme);
+    containerCardPesquisa.appendChild(card);
+    });
+
+
+  } catch (error) {
+    console.log(error);
+    
+  }
+  
+}
+pesquisarComUrl()
+/* 
+// valor do input
 function pegarValorInput() {
 
   FormularioPesquisar.addEventListener("submit", async (event) => {
@@ -87,7 +132,7 @@ function pegarValorInput() {
     // 🕒 Mostra mensagem de aviso se passar de 30 segundos
     const tempoLimite = setTimeout(() => {
       containerCardPesquisa.innerHTML = `<p class="aviso">Tempo de busca excedido (30s).</p>`;
-    }, 50000);
+    }, 3000);
 
     try {
       const resultadoPesquisa = await getPesquisar(valorDigitado);
@@ -116,8 +161,8 @@ function pegarValorInput() {
 }
 
 pegarValorInput();
-
-
+ */
+//teste literal
 /* async function mostrarPesquisa() {
 
     const nomeBatman = await getPesquisar("batman")

@@ -8,10 +8,17 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
-h1,h2,h3{
-    background-image: linear-gradient(to right,#92c9c6, #aaf368);
-     -webkit-background-clip: text;
+
+h1,
+h2,
+h3 {
+    background-image: linear-gradient(to right, #92c9c6, #aaf368);
+    -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
@@ -29,16 +36,17 @@ header .logo {
 }
 
 #pesquisar-botao {
-    color: white;
-    background-color: #c22f98;
-    border: 5px solid #e8217e;
-
-    &:hover {
-        background-color: #e8217e;
-        border: 5px solid #c22f98;
-    }
+    color: #fff;
+    background: linear-gradient(135deg, #c22f98, #e8217e);
+    border: none;
+    padding: 0.3em 1em;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
-.bi{
+
+.bi {
     color: #92c9c6;
     font-size: 1.8em;
 }
@@ -93,17 +101,6 @@ header .logo {
     object-fit: cover;
 }
 
-.card:hover,
-.col:hover {
-    transform: scale(1.06);
-    cursor: pointer;
-}
-
-.card:hover img,
-.col:hover img {
-    filter: brightness(1.05);
-}
-
 /* demais card com col */
 .col {
     height: 45dvh;
@@ -124,7 +121,7 @@ header .logo {
 .resultado-pesquisa_voltar {
     position: absolute;
     top: 2em;
-    left: 2em;
+    left: 1.2em;
     color: white;
     text-decoration: none;
 }
@@ -143,6 +140,10 @@ header .logo {
     height: 45dvh;
 }
 
+.filme-descricao {
+    text-align: justify;
+}
+
 .filme-video,
 video {
     width: 95%;
@@ -156,6 +157,31 @@ footer {
     background-color: black;
     color: white;
     text-align: center;
+    margin-top: auto;
+
+}
+
+/*desabiliar hover*/
+@media (hover: hover) and (pointer: fine) {
+
+    /* botao cabeçalho */
+    #pesquisar-botao:hover,
+    #pesquisar-botao:active {
+        background: linear-gradient(135deg, #e8217e, #c22f98);
+        transform: translateY(0) scale(1.03);
+    }
+
+    /* card carrossel  */
+    .card:hover,
+    .col:hover {
+        transform: scale(1.06);
+        cursor: pointer;
+    }
+
+    .card:hover img,
+    .col:hover img {
+        filter: brightness(1.05);
+    }
 }
 
 @media (min-width: 1024px) {
