@@ -93,7 +93,7 @@ async function getMaisDetalhes(id){
 
         //genero
         const genero = resposta.genres
-        console.log(genero);
+        cardSugestoes(genero)
         
         filmeGenero.innerHTML = genero.map(nomeFilme => nomeFilme.name).join(", ")
 
@@ -107,7 +107,7 @@ async function getMaisDetalhes(id){
         }
 
         
-        console.log(resposta);
+       // console.log(resposta);
 
     } catch (error) {
         console.log(error);
@@ -116,3 +116,54 @@ async function getMaisDetalhes(id){
 
 
 getMaisDetalhes(valorMaisInfor)
+
+const containerDescricao = document.getElementById('containerCardCarrosselDescricao')
+
+function criarCardCarrossel(filme) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    card.innerHTML = `
+        <a href="./descricao.html?id=${filme.id}">
+            <img src="${TMDB_IMG}${filme.poster_path}" alt="${filme.title}">
+        </a>
+    `
+    return card
+}
+
+async function cardSugestoes(ids) {
+  if (!ids) return
+  
+  //genero
+  const idsGeneros = ids.map(idsFilme => idsFilme.id)
+
+  try {
+
+    const resposta = await montarUrl(`/discover/movie`,{
+      with_genres: idsGeneros.join(','),
+      sort_by: 'popularity.desc'
+    })
+
+    containerDescricao.innerHTML = '';
+
+    resposta.results.forEach(filme => {
+
+    const card = criarCardCarrossel(filme);
+    containerDescricao.appendChild(card);
+    });
+
+    console.log(resposta);
+    
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
+/* pegar a lista de generos Api ok
+depois pegar os IDs ok
+depois repassar cada id para a url 
+retornar 5 cards de cada id
+retornar no card carrossel */

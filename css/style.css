@@ -87,7 +87,7 @@ header .logo {
     flex: 0 0 15.063em;
     /* flex: 0 0 clamp(10.56em, 14vw, 15.063em); */
     width: 11em;
-    height: 45dvh;
+    height: 45vh;
     scroll-snap-align: start;
     background-color: transparent;
     transition: transform .25s ease;
@@ -103,7 +103,7 @@ header .logo {
 
 /* demais card com col */
 .col {
-    height: 45dvh;
+    height: 45vh;
 }
 
 /*pagina resultado da pesquisa */
