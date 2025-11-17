@@ -46,6 +46,29 @@ header .logo {
     transition: all 0.25s ease;
 }
 
+.botao-suspenso {
+    color: #010d39;
+    background-image: linear-gradient(to right, #92c9c6, #aaf368);
+    border: none;
+    padding: 0.5em 1em;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.dropdown-menu .dropdown-item {
+    transition: background 0.3s ease;
+}
+
+.dropdown-menu .dropdown-item.active,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu .dropdown-item:active {
+    background-image: linear-gradient(to right, #92c9c6, #aaf368);
+    color: black;
+}
+
+
 .bi {
     color: #92c9c6;
     font-size: 1.8em;
@@ -61,20 +84,26 @@ header .logo {
 
 
 /* card carousel */
-.carousel-container {
+.carousel-container,
+.container, #containerCardPadrao {
     position: relative;
-    width: 97%;
+    width: 100%;
     margin: auto;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-.carousel {
+
+.carousel-card {
     width: 100%;
     height: auto;
+
     display: flex;
-    overflow-x: auto;
     gap: 0.5rem;
+
+    overflow-x: auto;
+
     padding: 1rem;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -84,9 +113,9 @@ header .logo {
 }
 
 .card {
-    flex: 0 0 15.063em;
-    /* flex: 0 0 clamp(10.56em, 14vw, 15.063em); */
-    width: 11em;
+    /*  flex: 0 0 15.063em; */
+    flex: 0 0 clamp(11.56em, 14vw, 15.063em);
+    /* width: 11em; */
     height: 45vh;
     scroll-snap-align: start;
     background-color: transparent;
@@ -184,10 +213,13 @@ footer {
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .form-control {
         width: 40dvw;
     }
+}
+
+@media (min-width: 1024px) {
 
     /* carrossel figure*/
     .carousel-item,

@@ -122,10 +122,11 @@ const containerDescricao = document.getElementById('containerCardCarrosselDescri
 function criarCardCarrossel(filme) {
     const card = document.createElement('div');
     card.classList.add('card');
+    const caminhoImg = filme.poster_path ? `${TMDB_IMG}${filme.poster_path}` : "/assets/favicon.png"
 
     card.innerHTML = `
         <a href="./descricao.html?id=${filme.id}">
-            <img src="${TMDB_IMG}${filme.poster_path}" alt="${filme.title}">
+            <img src="${caminhoImg}" alt="${filme.title}">
         </a>
     `
     return card

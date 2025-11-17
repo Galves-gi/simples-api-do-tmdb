@@ -17,26 +17,42 @@
 <body>
 
     <!-- cabeçalho -->
-    <header class="navbar navbar-expand-lg position-relative">
+    <header class="navbar navbar-expand-md position-relative ">
         <div class="container-fluid p-md-2 p-2">
 
             <a class="navbar-brand" href="/index.html">
                 <img src="/assets/logo.png" alt="" srcset="" class="logo">
             </a>
 
-            <button class="navbar-toggler border border-0 text-infor" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler border border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <i class="bi bi-list"></i>
             </button>
 
             <nav class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-auto p-sm-1" id="pesquisa-form" role="search" action="./pages/pesquisa.html"
-                    method="get">
-                    <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="search" type="text"
-                        placeholder="Pesquisar por filmes..." aria-label="Search" />
-                    <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
-                </form>
+                <div class="d-flex flex-column-reverse flex-md-row gap-2 align-items-center ms-auto">
+
+                    <div class="dropdown m-0 p-0 w-100 w-sm-100 w-md-auto">
+                        <button class="btn dropdown-toggle botao-suspenso w-100 w-sm-100 w-md-auto" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                            Gêneros
+                        </button>
+                        
+                        <ul class="dropdown-menu dropdown-menu-dark bg-black">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+
+                        </ul>
+                    </div>
+
+
+                    <form class="d-flex p-sm-1 w-100" id="pesquisa-form" role="search" action="./pages/pesquisa.html"
+                        method="get">
+                        <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="search" type="text"
+                            placeholder="Pesquisar por filmes..." aria-label="Search" />
+                        <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
+                    </form>
+                </div>
 
             </nav>
 
@@ -87,7 +103,11 @@
         <!-- cards carousel-->
         <section class="carousel-container my-2">
 
-            <div class="carousel" id="containerCardCarrosselLancamentoCartaz">
+            <button class="btn border border-0 botao-voltar">
+                <i class="bi bi-chevron-compact-left"></i>
+            </button>
+
+            <div class="carousel-card" id="containerCardCarrosselLancamentoCartaz">
 
                 <!-- <div class="card">
                     <a href="#">
@@ -96,6 +116,11 @@
                 </div> -->
 
             </div>
+
+            <button class="btn border border-0 botao-prox">
+                <i class="bi bi-chevron-compact-right"></i>
+            </button>
+
 
         </section>
 
@@ -105,7 +130,11 @@
         <!-- cards carousel-->
         <section class="carousel-container my-2">
 
-            <div class="carousel" id="containerCardCarrosselFuturoLancamento">
+            <button class="btn border border-0 botao-voltar">
+                <i class="bi bi-chevron-compact-left"></i>
+            </button>
+
+            <div class="carousel-card" id="containerCardCarrosselFuturoLancamento">
 
                 <!-- <div class="card">
                     <a href="#">
@@ -114,6 +143,10 @@
                 </div> -->
 
             </div>
+
+            <button class="btn border border-0 botao-prox">
+                <i class="bi bi-chevron-compact-right"></i>
+            </button>
 
         </section>
 
@@ -141,7 +174,8 @@
     </footer>
 
 
-    <script type="module" src="/js/index.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/funcionalidade.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

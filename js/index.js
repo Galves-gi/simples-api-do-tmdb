@@ -32,6 +32,12 @@ async function montarUrl(caminho, params = {}) {
   return resultado.json();
 }
 
+const data = new Date()
+const dataAtual = (`${data.getDate()}${data.getMonth() + 1}${data.getFullYear()}`)
+
+console.log(dataAtual);
+
+
 
 /* rotas */
 /* url lançamentos em cartaz */
@@ -41,7 +47,7 @@ async function getLancamentoCartaz(page = 1){
 
 /* url futuro lançamentos */
 async function getFuturoLancamento(page = 1){
-    return montarUrl('/movie/upcoming', { page, 'primary_release_date.gte': '2025-11-14', region: "BR" })
+    return montarUrl('/movie/upcoming', { page, 'primary_release_date.gte': '', region: "BR" })
 }
 
 /* url mais avaliado*/
