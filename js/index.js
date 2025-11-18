@@ -55,6 +55,11 @@ async function getMaisAvaliados(page = 1){
     return montarUrl('/movie/top_rated', { page })
 }
 
+async function getGeneros() {
+  return montarUrl('/genre/movie/list')
+}
+
+
 /* url pesquisar */
 /* async function getPesquisar(valorDigitado, page = 1) {
     try {
@@ -143,19 +148,18 @@ renderizarLista({
   container: containerLancamentoCartaz,
   chamarRota: getLancamentoCartaz,
   createCardFunction: criarCardCarrossel,
-  limit: 12
 });
 //futuro lancamento
 renderizarLista({
   container: containerFuturoLancamento,
   chamarRota: getFuturoLancamento,
   createCardFunction: criarCardCarrossel,
-  limit: 12
 });
 //mais avaliado
 renderizarLista({
   container: containerCardPadrao,
   chamarRota: getMaisAvaliados,
   createCardFunction: criarCardPadrao,
-  limit: 15
 });
+
+

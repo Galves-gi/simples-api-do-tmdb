@@ -17,29 +17,45 @@
 <body>
 
     <!-- cabeçalho -->
-    <header class="navbar navbar-expand-lg position-relative">
+    <header class="navbar navbar-expand-md position-relative ">
         <div class="container-fluid p-md-2 p-2">
 
             <a class="navbar-brand" href="/index.html">
                 <img src="/assets/logo.png" alt="" srcset="" class="logo">
             </a>
 
-            <button class="navbar-toggler border border-0 text-infor" type="button" data-bs-toggle="collapse"
+            <button class="navbar-toggler border border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <i class="bi bi-list"></i>
             </button>
 
             <nav class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-auto p-sm-1" id="pesquisa-form" role="search" action="pesquisa.html"
-                    method="get">
+                <div class="d-flex flex-column-reverse flex-md-row gap-2 align-items-center ms-auto">
 
-                    <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="search" type="text"
-                        placeholder="Pesquisar por filmes..." aria-label="Search" required />
+                    <div class="dropdown m-0 p-0 w-100 w-sm-100 w-md-auto">
+                        <button class="btn dropdown-toggle botao-suspenso w-100 w-sm-100 w-md-auto" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                            Gêneros
+                        </button>
 
-                    <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
+                        <ul class="dropdown-menu dropdown-menu-dark bg-black menu-generos">
+                
+                           <!--  <li class="dropdown-item">
+                                <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
+                                <label class="form-check-label" for="firstCheckbox">First checkbox</label>
+                            </li> -->
+                        </ul>
+                    </div>
 
-                </form>
+
+                    <form class="d-flex p-sm-1 w-100" id="pesquisa-form" role="search" action="pesquisa.html"
+                        method="get">
+                        <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="search" type="text"
+                            placeholder="Pesquisar por filmes..." aria-label="Search" />
+                        <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
+                    </form>
+                </div>
 
             </nav>
 
@@ -47,8 +63,9 @@
     </header>
 
     <!-- resultado da pesquisa -->
-    <main class="resultado-pesquisa">
-        <a href="/index.html" class="resultado-pesquisa_voltar d-flex justify-content-center align-items-center m-0 p-0 mb-2">
+    <main class="resultado-pesquisa d-flex justify-content-center align-content-start">
+        <a href="/index.html"
+            class="resultado-pesquisa_voltar d-flex justify-content-center align-items-center m-0 p-0 mb-2">
             <i class="bi bi-arrow-left-circle-fill me-2"></i>
             <span>Voltar</span>
         </a>

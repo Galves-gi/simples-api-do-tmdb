@@ -57,6 +57,20 @@ header .logo {
     transition: all 0.25s ease;
 }
 
+.dropdown-menu {
+    height: 10em;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #000 #d4ffd6;
+    -ms-overflow-style: none;
+    direction: rtl;
+
+}
+
+.dropdown-menu * {
+    direction: ltr;
+}
+
 .dropdown-menu .dropdown-item {
     transition: background 0.3s ease;
 }
@@ -85,7 +99,8 @@ header .logo {
 
 /* card carousel */
 .carousel-container,
-.container, #containerCardPadrao {
+.container,
+#containerCardPadrao {
     position: relative;
     width: 100%;
     margin: auto;

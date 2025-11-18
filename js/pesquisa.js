@@ -71,11 +71,11 @@ const pesquisarInput = document.getElementById('pesquisar-input');
 
 const containerCardPesquisa = document.getElementById('containerCardPesquisa');
 
+  const urlParams = new URLSearchParams(window.location.search)
+  const valorUrl = urlParams.get("search")
+
 // valor da url
 async function pesquisarComUrl() {
-  const urlParams = new URLSearchParams(window.location.search)
-
-  const valorUrl = urlParams.get("search")
 
   if (!valorUrl) {
   containerCardPesquisa.innerHTML = '<p class="aviso">Digite o nome de um filme</p>';
@@ -113,63 +113,191 @@ async function pesquisarComUrl() {
   
 }
 pesquisarComUrl()
+
+
 /* 
-// valor do input
-function pegarValorInput() {
+botão suspenso
 
-  FormularioPesquisar.addEventListener("submit", async (event) => {
-    event.preventDefault();
+busca por palavra chave ok
 
-    containerCardPesquisa.innerHTML = '<p class="aviso">Carregando...</p>';
+busca por gênero
+- listar os gêneros no html ok
+- pegar os ids dos selecionados ok
+- repassar os ids selecionados para url de busca da api 
+- retornar na tela
 
-    const valorDigitado = pesquisarInput.value.trim();
 
-    if (!valorDigitado) {
-      containerCardPesquisa.innerHTML = '<p class="aviso">Digite o nome de um filme</p>';
+busca dupla
+- pegar a lista de gêneros selecionados
+- comparar em cada retorno do input
+*/
+
+/* chamar a api de lista de generos */
+let generosSelecionados = [];
+
+async function getGeneros() {
+    try {
+        const resposta = await montarUrl(`/genre/movie/list`);
+        return resposta.genres;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/* exibir no frontend */
+const containerGeneros = document.querySelector(".menu-generos");
+
+async function exibirGenerosFrontend(){
+    const listaGeneros = await getGeneros();
+
+    listaGeneros.forEach(cadaGenero => {
+        const checkboxesGenero = document.createElement('li');
+        checkboxesGenero.classList.add("dropdown-item");
+        
+        checkboxesGenero.innerHTML = `
+            <input class="form-check-input me-1" type="checkbox" value="${cadaGenero.id}" id="genero-${cadaGenero.id}">
+            <label class="form-check-label" for="genero-${cadaGenero.id}">${cadaGenero.name}</label>
+        `;
+        
+        containerGeneros.appendChild(checkboxesGenero);
+    });
+
+    // Inicializar os event listeners após criar os checkboxes
+    inicializarEventListeners();
+}
+
+// funcao de marcar e desmarcar os checkboxes
+function inicializarEventListeners() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxes.forEach(checkbox => {
+
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                // Adiciona ao array se estiver marcado
+                adicionarGenero(this.value);
+            } else {
+                // Remove do array se estiver desmarcado
+                removerGenero(this.value);
+            }
+            
+            exibirFilmes();
+        });
+    });
+}
+
+// Função para adicionar gênero ao array
+function adicionarGenero(generoId) {
+    if (!generosSelecionados.includes(generoId)) {
+        generosSelecionados.push(generoId);
+        //console.log(`Gênero adicionado: ${generoId}`);
+    }
+}
+
+// Função para remover gênero do array
+function removerGenero(generoId) {
+    const index = generosSelecionados.indexOf(generoId);
+    if (index !== -1) {
+        generosSelecionados.splice(index, 1);
+        //console.log(`Gênero removido: ${generoId}`);
+    }
+}
+
+// mostrar os filmes de acordo com os gêneros selecionados
+function exibirFilmes() {
+/*     const urlParams = new URLSearchParams(window.location.search);
+    const valorUrl = urlParams.get("search") || ''; */
+    
+    console.log('Gêneros selecionados:', generosSelecionados);
+    console.log('Valor URL:', valorUrl);
+
+    if (generosSelecionados.length > 0 && !valorUrl) {
+        exibirGeneros(generosSelecionados);
+
+    } else if (valorUrl && generosSelecionados.length === 0) {
+        pesquisarComUrl();
+
+    } else if (valorUrl && generosSelecionados.length > 0) {
+        exibirGenerosComPesquisa(valorUrl, generosSelecionados);
+
+    } else {
+        containerCardPesquisa.innerHTML = '<p class="aviso">Selecione gêneros ou pesquise um filme</p>';
+    }
+}
+
+
+
+async function exibirGeneros(idsGeneros) {
+  if (!idsGeneros) return
+
+  try {
+
+    const resposta = await montarUrl(`/discover/movie`,{
+      with_genres: idsGeneros.join(','),
+      sort_by: 'popularity.desc'
+    })
+
+    containerCardPesquisa.innerHTML = '';
+
+    resposta.results.forEach(filme => {
+
+    const card = criarCardPadrao(filme);
+    containerCardPesquisa.appendChild(card);
+    });
+
+    console.log(resposta);
+    
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+/* 
+realizar pesquisa
+pegar cada resultado de pesquisa, passar no filter e comparar o idsGeneros
+retornar somente filter true
+*/
+
+async function exibirGenerosComPesquisa(input,idsGeneros) {
+  containerCardPesquisa.innerHTML = '<p class="aviso">Carregando...</p>';
+
+  try {
+    const resposta = await montarUrl(`/search/movie?query=${input}`, {
+      with_genres: idsGeneros.join(','),
+      sort_by: 'popularity.desc'
+    })
+
+    const dados = resposta.results
+
+    if (!dados || dados.length === 0) {
+      containerCardPesquisa.innerHTML = `<p class="aviso">Nenhum filme encontrado!</p>`;
       return;
     }
 
-    // 🕒 Mostra mensagem de aviso se passar de 30 segundos
-    const tempoLimite = setTimeout(() => {
-      containerCardPesquisa.innerHTML = `<p class="aviso">Tempo de busca excedido (30s).</p>`;
-    }, 3000);
-
-    try {
-      const resultadoPesquisa = await getPesquisar(valorDigitado);
-
-      // ⏹ Cancela o temporizador se a resposta vier antes dos 30s
-      clearTimeout(tempoLimite);
-
-      if (!resultadoPesquisa || resultadoPesquisa.length === 0) {
-        containerCardPesquisa.innerHTML = `<p class="aviso">Nenhum filme encontrado!</p>`;
-        return;
-      }
-
-      // 🧱 Exibe os cards normalmente
-      containerCardPesquisa.innerHTML = '';
-      resultadoPesquisa.forEach(filme => {
-        const card = criarCardPadrao(filme);
-        containerCardPesquisa.appendChild(card);
+    const resultadosFiltrados = dados.filter(filme => {
+        return idsGeneros.every(idsGeneros => 
+                filme.genre_ids.includes(Number(idsGeneros))
+            );
+        });
+        
+        if (resultadosFiltrados.length === 0) {
+            containerCardPesquisa.innerHTML = '<p class="aviso">Nenhum filme encontrado com os gêneros selecionados!</p>';
+            return;
+        }
+        
+        containerCardPesquisa.innerHTML = '';
+        resultadosFiltrados.forEach(filme => {
+            const card = criarCardPadrao(filme);
+            containerCardPesquisa.appendChild(card);
       });
 
-    } catch (error) {
-      clearTimeout(tempoLimite);
-      containerCardPesquisa.innerHTML = `<p class="aviso">Erro ao buscar filmes.</p>`;
-      console.error(error);
-    }
-  });
-}
-
-pegarValorInput();
- */
-//teste literal
-/* async function mostrarPesquisa() {
-
-    const nomeBatman = await getPesquisar("batman")
-
-    const todosFilmes = nomeBatman.map(cada => cada.title)
-
-    console.log(todosFilmes);
+  } catch (error) {
+    console.log(error);
     
+  }
 }
-mostrarPesquisa() */
+
+
+
+await exibirGenerosFrontend();
