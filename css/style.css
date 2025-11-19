@@ -57,6 +57,14 @@ header .logo {
     transition: all 0.25s ease;
 }
 
+.botao-suspenso.dropdown-toggle::after {
+    position: static !important;
+    margin: 0;
+    padding: 0;
+    align-self: center;
+    font-size: 1.5em;
+}
+
 .dropdown-menu {
     height: 10em;
     overflow-y: auto;
@@ -82,10 +90,17 @@ header .logo {
     color: black;
 }
 
-
-.bi {
+.bi-chevron-compact-left, .bi-chevron-compact-right {
     color: #92c9c6;
     font-size: 1.8em;
+    display: none;
+}
+
+.bi-search {
+    color: #92c9c6;
+    font-size: 1.4em;
+    border: none;
+    background-color: transparent;
 }
 
 /* carrossel de imagens */
@@ -129,8 +144,8 @@ header .logo {
 
 .card {
     /*  flex: 0 0 15.063em; */
-    flex: 0 0 clamp(11.56em, 14vw, 15.063em);
-    /* width: 11em; */
+    flex: 0 0 clamp(12.56em, 14vw, 15.063em);
+    width: 11em;
     height: 45vh;
     scroll-snap-align: start;
     background-color: transparent;
@@ -232,6 +247,11 @@ footer {
     .form-control {
         width: 40dvw;
     }
+    .bi-chevron-compact-left, .bi-chevron-compact-right {
+    color: #92c9c6;
+    font-size: 1.8em;
+    display: inline;
+}
 }
 
 @media (min-width: 1024px) {

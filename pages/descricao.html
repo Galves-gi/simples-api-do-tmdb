@@ -18,29 +18,47 @@
 <body>
 
     <!-- cabeçalho -->
-    <header class="navbar navbar-expand-lg position-relative">
+    <header class="navbar navbar-expand-md position-relative ">
         <div class="container-fluid p-md-2 p-2">
 
             <a class="navbar-brand" href="/index.html">
                 <img src="/assets/logo.png" alt="" srcset="" class="logo">
             </a>
 
-            <button class="navbar-toggler border border-0 text-infor" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="bi bi-list"></i>
+            <button type="button" class="btn navbar-toggler  border border-0" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+                <i class="bi bi-search"></i>
             </button>
 
             <nav class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex ms-auto p-sm-1" id="pesquisa-form" role="search" action="pesquisa.html"
-                    method="get">
-                    <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="search" type="text"
-                        placeholder="Pesquisar por filmes..." aria-label="Search" />
-                    <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
+                <form class="d-flex flex-column-reverse flex-md-row gap-2 align-items-center ms-auto"  id="pesquisa-form" role="search" action="/pages/pesquisa.html"
+                        method="get">
+
+                    <div class="dropdown m-0 p-0 w-25 w-sm-100 w-md-auto">
+                        <button
+                            class="btn dropdown-toggle botao-suspenso w-100 w-sm-100 w-md-auto d-flex justify-content-center align-content-center gap-2 text-center"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                            Gêneros
+                            <span class="qtdd-generos rounded bg-white "
+                                style="display: none;width: 1.5em;height: 1.5em;text-align: center;"></span>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-dark bg-black menu-generos">
+
+
+                        </ul>
+                    </div>
+                    <div class="d-flex p-sm-1 w-100">
+                        <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="search" type="text"
+                            placeholder="Pesquisar por filmes..." aria-label="Search" />
+                        <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
+                    </div>
                 </form>
+
             </nav>
 
         </div>
+
     </header>
 
     <!-- corpo -->
@@ -113,6 +131,7 @@
     </footer>
 
     <script src="/js/descricao.js"></script>
+        <script src="/js/pesquisa.js"></script>
     <script src="/js/funcionalidade.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
