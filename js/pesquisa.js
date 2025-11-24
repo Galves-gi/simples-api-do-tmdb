@@ -58,7 +58,7 @@ function criarCardPadrao(filme) {
     const caminhoImg = filme.poster_path ? `${TMDB_IMG}${filme.poster_path}` : "/assets/favicon.png"
 
     cardPadrao.innerHTML = `
-        <a href="./descricao.html?id=${filme.id}">
+        <a href="./pages/descricao.html?id=${filme.id}">
             <img src="${caminhoImg}" alt="${filme.title}">
         </a>
     `
@@ -71,53 +71,8 @@ const pesquisarInput = document.getElementById('pesquisar-input');
 
 const containerCardPesquisa = document.getElementById('containerCardPesquisa');
 
-// valor da url
-const urlParams = new URLSearchParams(window.location.search)
-const valorUrl = urlParams.get("search")
+let valorDigitado
 
-/* async function pesquisarComUrl() {
-  console.log(valorUrl);
-  
-
-  if (!valorUrl) {
-  containerCardPesquisa.innerHTML = '<p class="aviso">Digite o nome de um filme</p>';
-  return;
-  }
-
-  containerCardPesquisa.innerHTML = '<p class="aviso">Carregando...</p>';
-
-  const tempoLimite = setTimeout(() => {
-  containerCardPesquisa.innerHTML = `<p class="aviso">Tempo de busca excedido (30s).</p>`;
-  }, 3000);
-
-  try {
-    const resultadoPesquisa = await getPesquisar(valorUrl);
-
-    clearTimeout(tempoLimite);
-
-    if (!resultadoPesquisa || resultadoPesquisa.length === 0) {
-    containerCardPesquisa.innerHTML = `<p class="aviso">Nenhum filme encontrado!</p>`;
-    return;
-    }
-
-    // 🧱 Exibe os cards normalmente
-    containerCardPesquisa.innerHTML = '';
-    resultadoPesquisa.forEach(filme => {
-    const card = criarCardPadrao(filme);
-    containerCardPesquisa.appendChild(card);
-    });
-
-
-  } catch (error) {
-    console.log(error);
-    
-  }
-  
-}
-pesquisarComUrl() */
-
-
-const valorDigitado = pesquisarInput.value.trim();
 // valor do input
 function pegarValorInput() {
 
@@ -126,14 +81,13 @@ function pegarValorInput() {
 
     containerCardPesquisa.innerHTML = '<p class="aviso">Carregando...</p>';
 
-    const valorDigitado = pesquisarInput.value.trim();
+    valorDigitado = pesquisarInput.value.trim();
 
     if (!valorDigitado) {
       containerCardPesquisa.innerHTML = '<p class="aviso">Digite o nome de um filme</p>';
       return;
     }
 
-    // 🕒 Mostra mensagem de aviso se passar de 30 segundos
     const tempoLimite = setTimeout(() => {
       containerCardPesquisa.innerHTML = `<p class="aviso">Tempo de busca excedido (30s).</p>`;
     }, 3000);
@@ -141,7 +95,6 @@ function pegarValorInput() {
     try {
       const resultadoPesquisa = await getPesquisar(valorDigitado);
 
-      // ⏹ Cancela o temporizador se a resposta vier antes dos 30s
       clearTimeout(tempoLimite);
 
       if (!resultadoPesquisa || resultadoPesquisa.length === 0) {
@@ -149,8 +102,13 @@ function pegarValorInput() {
         return;
       }
 
-      // 🧱 Exibe os cards normalmente
+      containerCardPadrao.classList.add("esconder");
+
       containerCardPesquisa.innerHTML = '';
+
+btnVoltar.classList.remove("d-none")
+      btnVoltar.classList.add("d-flex")
+
       resultadoPesquisa.forEach(filme => {
         const card = criarCardPadrao(filme);
         containerCardPesquisa.appendChild(card);
@@ -164,24 +122,6 @@ function pegarValorInput() {
   });
 }
 pegarValorInput()
-
-
-/* 
-botão suspenso
-
-busca por palavra chave ok
-
-busca por gênero
-- listar os gêneros no html ok
-- pegar os ids dos selecionados ok
-- repassar os ids selecionados para url de busca da api 
-- retornar na tela
-
-
-busca dupla
-- pegar a lista de gêneros selecionados
-- comparar em cada retorno do input
-*/
 
 /* chamar a api de lista de generos */
 
@@ -202,26 +142,27 @@ const containerGeneros = document.querySelectorAll(".menu-generos"); // ul onde 
 async function exibirGenerosFrontend(){
     const listaGeneros = await getGeneros();
 
-    containerGeneros.forEach(containerGeneros =>{
+    containerGeneros.forEach((container, indexLista) =>{
 
           listaGeneros.forEach(cadaGenero => {
-              const checkboxesGenero = document.createElement('li');
+              const li = document.createElement('li');
               
-              checkboxesGenero.classList.add("dropdown-item");
+              li.classList.add("dropdown-item");
               
-              checkboxesGenero.innerHTML = `
+              li.innerHTML = `
                   <input class="form-check-input me-1" type="checkbox" name="generos" value="${cadaGenero.id}" id="genero-${cadaGenero.id}">
                   <label class="form-check-label" for="genero-${cadaGenero.id}">${cadaGenero.name}</label>
               `;
               
-              containerGeneros.appendChild(checkboxesGenero);
+              container.appendChild(li);
           });
 
     })
 
-    // Inicializar os event listeners após criar os checkboxes
+    // Inicializar os event listeners/opções do botão após criar os checkboxes
     pegarIdsGeneros();
 }
+
 
 // funcao de marcar e desmarcar os checkboxes
 function pegarIdsGeneros() {
@@ -238,6 +179,7 @@ function pegarIdsGeneros() {
                 // Remove do array se estiver desmarcado
                 removerGenero(this.value);
             }
+            console.log("filtro carregado");
             
             qtddGeneros.innerHTML = generosSelecionados.length
             qtddGeneros.style.display = 'inline'
@@ -263,34 +205,13 @@ function removerGenero(generoId) {
     }
 }
 
-/* // mostrar os filmes de acordo com os gêneros selecionados
-function exibirFilmes() {
-    
-    console.log('Gêneros selecionados:', generosSelecionados);
-    console.log('Valor URL:', valorUrl);
-
-    if (generosSelecionados.length > 0 && !valorUrl) {
-        exibirGeneros(generosSelecionados);
-
-    } else if (valorUrl && generosSelecionados.length === 0) {
-        pesquisarComUrl();
-
-    } else if (valorUrl && generosSelecionados.length > 0) {
-        exibirGenerosComPesquisa(valorUrl, generosSelecionados);
-
-    } else {
-        containerCardPesquisa.innerHTML = '<p class="aviso">Selecione gêneros ou pesquise um filme</p>';
-    }
-} */
-
 function exibirFilmes() {
     FormularioPesquisar.addEventListener('submit', (event)=>{
 
       event.preventDefault();
 
-
       console.log('Gêneros selecionados:', generosSelecionados);
-      //console.log('Valor URL:', valorUrl);
+      console.log('Valor input:', valorDigitado);
 
       if (generosSelecionados.length > 0 && !valorDigitado) {
           exibirGeneros(generosSelecionados);
@@ -299,7 +220,7 @@ function exibirFilmes() {
           pegarValorInput();
 
       } else if (valorDigitado && generosSelecionados.length > 0) {
-          exibirGenerosComPesquisa(generosSelecionados);
+          exibirGenerosComPesquisa(generosSelecionados, valorDigitado);
 
       } else {
           containerCardPesquisa.innerHTML = '<p class="aviso">Selecione gêneros ou pesquise um filme</p>';
@@ -319,7 +240,12 @@ async function exibirGeneros(idsGeneros) {
       sort_by: 'popularity.desc'
     })
 
+    containerCardPadrao.classList.add("esconder");
+
     containerCardPesquisa.innerHTML = '';
+
+    btnVoltar.classList.remove("d-none")
+        btnVoltar.classList.add("d-flex")
 
     resposta.results.forEach(filme => {
 
@@ -341,17 +267,14 @@ pegar cada resultado de pesquisa, passar no filter e comparar o idsGeneros
 retornar somente filter true
 */
 
-async function exibirGenerosComPesquisa(idsGeneros) {
+async function exibirGenerosComPesquisa(idsGeneros, input) {
   containerCardPesquisa.innerHTML = '<p class="aviso">Carregando...</p>';
 
   try {
-    const resposta = await getPesquisar(valorDigitado)
-
-    console.log(resposta);
+    const resposta = await getPesquisar(input)
     
-
-    const dados = resposta.results;
-    console.log(dados);
+    const dados = resposta;
+    //console.log(dados);
     
 
     if (!dados || dados.length === 0) {
@@ -359,7 +282,7 @@ async function exibirGenerosComPesquisa(idsGeneros) {
       return;
     }
 
-    // FILTRAR MANUALMENTE POR GÊNEROS
+    //filtragem
     const resultadosFiltrados = dados.filter(filme =>
       idsGeneros.every(id => filme.genre_ids.includes(Number(id)))
     );
@@ -369,8 +292,11 @@ async function exibirGenerosComPesquisa(idsGeneros) {
         '<p class="aviso">Nenhum filme encontrado com os gêneros selecionados!</p>';
       return;
     }
-
+    containerCardPadrao.classList.add("esconder");
     containerCardPesquisa.innerHTML = '';
+
+    btnVoltar.classList.remove("d-none")
+    btnVoltar.classList.add("d-flex")
 
     resultadosFiltrados.forEach(filme => {
       const card = criarCardPadrao(filme);
@@ -385,4 +311,61 @@ async function exibirGenerosComPesquisa(idsGeneros) {
 
 
 
-await exibirGenerosFrontend();
+exibirGenerosFrontend();
+
+
+/* cards filmes mais avaliados */
+const containerCardPadrao = document.getElementById('containerCardPadrao');
+
+async function getMaisAvaliados(page = 1){
+    return montarUrl('/movie/top_rated', { page })
+}
+
+// funcão reutilizada
+async function renderizarLista({
+  container,
+  chamarRota,
+  createCardFunction = criarCardPadrao,
+  //limit = 12
+}) {
+  container.innerHTML = '<p>Carregando...</p>';
+
+  try {
+    const dados = await chamarRota();
+    const lista = dados.results;
+
+    container.innerHTML = '';
+
+    if (!lista.length) {
+      container.innerHTML = '<p>Nenhum filme encontrado.</p>';
+      return;
+    }
+
+    lista.forEach(filme => {
+      container.appendChild(createCardFunction(filme));
+    });
+
+  } catch (err) {
+    container.innerHTML = `<p>Erro ao carregar: ${err.message}</p>`;
+    console.error(err);
+  }
+}
+
+
+renderizarLista({
+  container: containerCardPadrao,
+  chamarRota: getMaisAvaliados,
+  createCardFunction: criarCardPadrao,
+});
+
+
+
+
+
+const btnVoltar = document.querySelector(".btn-voltar");
+
+btnVoltar.addEventListener("click", () => {
+  containerCardPadrao.classList.remove("esconder"); 
+  containerCardPesquisa.innerHTML = '';
+});
+
