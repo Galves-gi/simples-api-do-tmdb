@@ -163,3 +163,41 @@ renderizarLista({
 });
 
 
+
+
+
+
+async function getGeneros() {
+    try {
+        const resposta = await montarUrl(`/genre/movie/list`);
+        return resposta.genres;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const containerGeneros = document.querySelectorAll(".menu-generos"); // ul onde vai aparecer as opções
+
+async function exibirGenerosFrontend(){
+    const listaGeneros = await getGeneros();
+
+    containerGeneros.forEach((container, indexLista) =>{
+
+          listaGeneros.forEach(cadaGenero => {
+              const li = document.createElement('li');
+              
+              li.classList.add("dropdown-item");
+              
+              li.innerHTML = `
+                  <input class="form-check-input me-1" type="checkbox" name="generos" value="${cadaGenero.id}" id="genero-${cadaGenero.id}">
+                  <label class="form-check-label" for="genero-${cadaGenero.id}">${cadaGenero.name}</label>
+              `;
+              
+              container.appendChild(li);
+          });
+
+    })
+
+    // Inicializar os event listeners/opções do botão após criar os checkboxes
+    pegarIdsGeneros();
+}

@@ -23,6 +23,10 @@ h3 {
     color: transparent;
 }
 
+.esconder {
+  display: none !important;
+}
+
 /* cabeçalho */
 header {
     width: 100%;
@@ -90,7 +94,8 @@ header .logo {
     color: black;
 }
 
-.bi-chevron-compact-left, .bi-chevron-compact-right {
+.bi-chevron-compact-left,
+.bi-chevron-compact-right {
     color: #92c9c6;
     font-size: 1.8em;
     display: none;
@@ -166,6 +171,40 @@ header .logo {
 }
 
 /*pagina resultado da pesquisa */
+/* modal 
+.modal-body.expanded {
+    height: 25em;
+}
+
+.botao-suspenso.expanded {
+    margin-bottom: 10em;
+}
+*/
+
+.btn-close {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    border: none;
+    opacity: 1;
+}
+
+.btn-close::before {
+    content: "×";
+    display: block;
+    font-size: 2rem;
+    line-height: 1.2rem;
+    text-align: center;
+    color: #aaf368;
+    font-weight: bold;
+}
+
+.btn-close:focus,
+.btn-close:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 .resultado-pesquisa {
     background-color: black;
     min-height: 100dvh;
@@ -247,11 +286,13 @@ footer {
     .form-control {
         width: 40dvw;
     }
-    .bi-chevron-compact-left, .bi-chevron-compact-right {
-    color: #92c9c6;
-    font-size: 1.8em;
-    display: inline;
-}
+
+    .bi-chevron-compact-left,
+    .bi-chevron-compact-right {
+        color: #92c9c6;
+        font-size: 1.8em;
+        display: inline;
+    }
 }
 
 @media (min-width: 1024px) {

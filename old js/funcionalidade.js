@@ -15,3 +15,19 @@ carrosseis.forEach(container =>{
 
 })
 
+
+
+/* modal 
+const modalBody = document.querySelector(".modal-body")
+const btnSuspenso = document.querySelector(".botao-suspenso")
+
+btnSuspenso.addEventListener('click', ()=>{
+    if (!modalBody.classList.contains('expanded')) {
+            modalBody.classList.toggle('expanded');
+            btnSuspenso.classList.toggle('expanded');
+    }else{
+        modalBody.classList.remove('expanded');
+        btnSuspenso.classList.remove('expanded');
+    }
+
+})*/
