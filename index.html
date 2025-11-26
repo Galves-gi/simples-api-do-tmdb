@@ -24,16 +24,17 @@
                 <img src="/assets/logo.png" alt="" srcset="" class="logo">
             </a>
 
-            <button type="button" class="btn navbar-toggler  border border-0" data-bs-toggle="modal"
+            <!--  <button type="button" class="btn navbar-toggler  border border-0" data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop">
                 <i class="bi bi-search"></i>
-            </button>
+            </button> -->
 
             <nav class="collapse navbar-collapse" id="navbarSupportedContent">
+
                 <form class="d-flex flex-column-reverse flex-md-row gap-2 align-items-center ms-auto" id="pesquisa-form"
                     role="search">
 
-                    <div class="dropdown m-0 p-0 w-25 w-sm-100 w-md-auto">
+                    <!-- <div class="dropdown m-0 p-0 w-25 w-sm-100 w-md-auto">
                         <button
                             class="btn dropdown-toggle botao-suspenso w-100 w-sm-100 w-md-auto d-flex justify-content-center align-content-center gap-2 text-center"
                             type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
@@ -46,7 +47,7 @@
 
 
                         </ul>
-                    </div>
+                    </div> -->
 
                     <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="search" type="text"
                         placeholder="Pesquisar por filmes..." aria-label="Search" />
@@ -61,80 +62,28 @@
 
     </header>
 
-    <!-- Modal mobile -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+    <!-- conteudo -->
 
-            <div class="modal-content bg-black" style="border:1px solid #aaf368 ;">
+    <main>
+        <section class="container-fluid conteudo-principal mt-4">
 
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                        Filtragem:
-                    </h1>
+            <div class="row text-center text-light" >
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body" style="height: 25em;">
-
-                    <form class="d-flex flex-column gap-2 align-items-center ms-auto w-100 w-md-25" id="pesquisa-form"
-                        role="search" >
-
-                        <input class="form-control w-100 w-md-25" id="pesquisar-input" name="search" type="text"
-                            placeholder="Pesquisar por filmes..." aria-label="Search" />
-
-                        <div class="dropdown m-0 p-0 w-100 w-md-25">
-                            <button
-                                class="btn dropdown-toggle botao-suspenso w-100 w-sm-100 w-md-auto d-flex justify-content-center align-content-center gap-2 text-center"
-                                type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                                data-bs-auto-close="outside" style="margin-bottom: 10em;">
-                                Gêneros
-                                <span class="qtdd-generos rounded bg-white "
-                                    style="display: none;width: 1.5em;height: 1.5em;text-align: center;"></span>
-                            </button>
-
-                            <ul class="dropdown-menu dropdown-menu-dark bg-black menu-generos">
-
-
-                            </ul>
-                        </div>
-
-                        <button class="rounded vermelho w-50 mt-5" id="pesquisar-botao" type="submit"
-                            data-bs-dismiss="modal">
-                            Buscar
-                        </button>
-
-                        <!--  <div class="d-flex justify-content-center align-items-center gap-2 mt-3 w-100">
-0
-                             <button class="rounded vermelho w-50" id="pesquisar-botao" type="submit"
-                                data-bs-dismiss="modal">
-                                Buscar
-                            </button>
-
-                             <button type="button" class="btn btn-primary btn-limpar">Limpar</button>
-                        </div> -->
-
-                    </form>
-                </div>
+                <!-- cards de filmes aqui -->
+                <!-- <div class="col">
+                    <a href="#">
+                        <img src="/assets/demon slayer.jpeg" alt="" srcset="" class="">
+                    </a>
+                </div> -->
 
             </div>
-        </div>
-    </div>
 
-
-    <!-- resultado da pesquisa -->
-    <main class="resultado-pesquisa d-flex justify-content-center align-content-start">
-        <button
-            class="resultado-pesquisa_voltar btn-voltar d-flex justify-content-center align-items-center m-0 p-0 mb-2 border-0 bg-transparent d-none">
-            <i class="bi bi-arrow-left-circle-fill me-2"></i>
-            <span>Voltar</span>
-        </button>
+        </section>
 
 
         <section class="container text-center mb-5 mt-3">
 
-            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3" id="containerCardPadrao">
+            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3 text-center text-light" id="container-filmes">
 
                 <!-- <div class="col">
                     <a href="]#">
@@ -145,29 +94,12 @@
             </div>
 
         </section>
-
-
-        <section class="container text-center mb-5 ">
-
-            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3 mt-5 text-center text-danger w-100"
-                id="containerCardPesquisa">
-
-            </div>
-
-        </section>
-
-
-
     </main>
 
-    <script src="/js/pesquisa.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
-        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
-        crossorigin="anonymous"></script>
+
+
+    <script type="module" src="/js/logica.js" defer></script>
 </body>
 
 </html>
