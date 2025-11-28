@@ -1,40 +1,57 @@
 import { searchMovies, discoverMovies, getGenres, TMDB_IMG } from "./conectApi.js";
 
-const pesquisaForm = document.getElementById('pesquisa-form')
-const pesquisarInput = document.getElementById('pesquisar-input')
+const pesquisaForm = document.querySelectorAll('[data-search-form]')
+const pesquisarInput = document.querySelectorAll('[data-search]')
 const containerFilmes = document.getElementById('container-filmes')
 
-pesquisaForm.addEventListener('submit',  async (e)=>{
-    e.preventDefault()
+let valorBusca = ''
 
-    const valorDigitado = pesquisarInput.value.toLowerCase().trim()
-    
-    if (valorDigitado.length === 0) {
-        alert("Digite algo no input")
-        return
-    }
+pesquisarInput.forEach(input =>{
+    input.addEventListener('input', ()=>{
+        valorBusca = input.value
 
-    containerFilmes.innerHTML = "Carregando...."
-    
-    try {
-        const resultados = await searchMovies(valorDigitado) 
-        containerFilmes.innerHTML = ""
-
-        resultados.results.forEach(cadaFilme => {
-
-            containerFilmes.innerHTML += `
-                <div class="col">
-                        <img src="${TMDB_IMG}${cadaFilme.poster_path} alt="${cadaFilme.title}">
-                </div>
-            `
-        });
-        
-    } catch (error) {
-        console.error(error);
-        containerFilmes.innerHTML = "Erro ao buscar o filme. Tente mais tarde."
-    }
+        pesquisarInput.forEach(todosInputs =>{
+            if (todosInputs !== input) {
+                todosInputs.value = valorBusca
+            }
+        })
+    })
 })
 
+pesquisaForm.forEach(form =>{
+    form.addEventListener('submit',  async (e)=>{
+        e.preventDefault()
+        const valorDigitado = valorBusca.trim().toLowerCase()
+
+        if (valorDigitado.length === 0) {
+            alert("Digite algo no input")
+            return
+        }
+
+        containerFilmes.innerHTML = "Carregando...."
+        
+        try {
+            const resultados = await searchMovies(valorDigitado) 
+            containerFilmes.innerHTML = ""
+
+            resultados.results.forEach(cadaFilme => {
+
+                containerFilmes.innerHTML += `
+                    <div class="col">
+                        <img src="${TMDB_IMG}${cadaFilme.poster_path} alt="${cadaFilme.title}">
+                    </div>
+                `
+            });
+
+            
+        } catch (error) {
+            containerFilmes.innerHTML = "Erro ao buscar o filme. Tente mais tarde."
+            console.error(error);
+        } 
+
+    })
+
+})
 
 
 // tratar infors => html 

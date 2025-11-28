@@ -24,15 +24,15 @@
                 <img src="/assets/logo.png" alt="" srcset="" class="logo">
             </a>
 
-            <!--  <button type="button" class="btn navbar-toggler  border border-0" data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop">
+            <button type="button" class="btn navbar-toggler  border border-0" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
                 <i class="bi bi-search"></i>
-            </button> -->
+            </button>
 
             <nav class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <form class="d-flex flex-column-reverse flex-md-row gap-2 align-items-center ms-auto" id="pesquisa-form"
-                    role="search">
+                <form class="d-flex flex-column-reverse flex-md-row gap-2 align-items-center ms-auto pesquisa-form"
+                    role="search" data-search-form>
 
                     <!-- <div class="dropdown m-0 p-0 w-25 w-sm-100 w-md-auto">
                         <button
@@ -49,8 +49,8 @@
                         </ul>
                     </div> -->
 
-                    <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="search" type="text"
-                        placeholder="Pesquisar por filmes..." aria-label="Search" />
+                    <input class="form-control me-2 w-sm-100" name="search" type="text"
+                        placeholder="Pesquisar por filmes..." aria-label="Search" data-search />
 
                     <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
 
@@ -62,14 +62,39 @@
 
     </header>
 
+    <form class="d-flex flex-column-reverse flex-md-row gap-2 align-items-center ms-auto pesquisa-form" role="search" data-search-form>
+
+        <!-- <div class="dropdown m-0 p-0 w-25 w-sm-100 w-md-auto">
+                        <button
+                            class="btn dropdown-toggle botao-suspenso w-100 w-sm-100 w-md-auto d-flex justify-content-center align-content-center gap-2 text-center"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                            Gêneros
+                            <span class="qtdd-generos rounded bg-white "
+                                style="display: none;width: 1.5em;height: 1.5em;text-align: center;"></span>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-dark bg-black menu-generos">
+
+
+                        </ul>
+                    </div> -->
+
+        <input class="form-control me-2 w-sm-100 pesquisar-input" name="search" type="text"
+            placeholder="Pesquisar por filmes..." aria-label="Search" data-search]/>
+
+        <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
+
+    </form>
+
     <!-- conteudo -->
 
     <main>
-        <section class="container-fluid conteudo-principal mt-4">
 
-            <div class="row text-center text-light" >
+        <section class="container text-center mb-5 mt-3">
 
-                <!-- cards de filmes aqui -->
+            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3 text-center text-light"
+                id="container-filmes">
+
                 <!-- <div class="col">
                     <a href="#">
                         <img src="/assets/demon slayer.jpeg" alt="" srcset="" class="">
@@ -79,24 +104,7 @@
             </div>
 
         </section>
-
-
-        <section class="container text-center mb-5 mt-3">
-
-            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3 text-center text-light" id="container-filmes">
-
-                <!-- <div class="col">
-                    <a href="]#">
-                        <img src="/assets/demon slayer.jpeg" alt="" srcset="" class="">
-                    </a>
-                </div> -->
-
-            </div>
-
-        </section>
     </main>
-
-
 
 
     <script type="module" src="/js/logica.js" defer></script>
