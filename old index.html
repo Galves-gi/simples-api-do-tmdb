@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -170,4 +171,178 @@
         crossorigin="anonymous"></script>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title>Mooviix</title>
+</head>
+
+<body>
+
+    <!-- cabeçalho -->
+    <header class="navbar navbar-expand-md position-relative ">
+        <div class="container-fluid p-md-2 p-2">
+
+            <a class="navbar-brand" href="/index.html">
+                <img src="/assets/logo.png" alt="" srcset="" class="logo">
+            </a>
+
+            <button type="button" class="btn navbar-toggler  border border-0" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+                <i class="bi bi-search"></i>
+            </button>
+
+            <nav class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex flex-column-reverse flex-md-row gap-2 align-items-center ms-auto" id="pesquisa-form"
+                    role="search">
+
+                    <div class="dropdown m-0 p-0 w-25 w-sm-100 w-md-auto">
+                        <button
+                            class="btn dropdown-toggle botao-suspenso w-100 w-sm-100 w-md-auto d-flex justify-content-center align-content-center gap-2 text-center"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                            Gêneros
+                            <span class="qtdd-generos rounded bg-white "
+                                style="display: none;width: 1.5em;height: 1.5em;text-align: center;"></span>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-dark bg-black menu-generos">
+
+
+                        </ul>
+                    </div>
+
+                    <input class="form-control me-2 w-sm-100" id="pesquisar-input" name="search" type="text"
+                        placeholder="Pesquisar por filmes..." aria-label="Search" />
+
+                    <button class="rounded vermelho" id="pesquisar-botao" type="submit">Buscar</button>
+
+                </form>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <!-- Modal mobile -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content bg-black" style="border:1px solid #aaf368 ;">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                        Filtragem:
+                    </h1>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body" style="height: 25em;">
+
+                    <form class="d-flex flex-column gap-2 align-items-center ms-auto w-100 w-md-25" id="pesquisa-form"
+                        role="search" >
+
+                        <input class="form-control w-100 w-md-25" id="pesquisar-input" name="search" type="text"
+                            placeholder="Pesquisar por filmes..." aria-label="Search" />
+
+                        <div class="dropdown m-0 p-0 w-100 w-md-25">
+                            <button
+                                class="btn dropdown-toggle botao-suspenso w-100 w-sm-100 w-md-auto d-flex justify-content-center align-content-center gap-2 text-center"
+                                type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                data-bs-auto-close="outside" style="margin-bottom: 10em;">
+                                Gêneros
+                                <span class="qtdd-generos rounded bg-white "
+                                    style="display: none;width: 1.5em;height: 1.5em;text-align: center;"></span>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-menu-dark bg-black menu-generos">
+
+
+                            </ul>
+                        </div>
+
+                        <button class="rounded vermelho w-50 mt-5" id="pesquisar-botao" type="submit"
+                            data-bs-dismiss="modal">
+                            Buscar
+                        </button>
+
+                        <!--  <div class="d-flex justify-content-center align-items-center gap-2 mt-3 w-100">
+0
+                             <button class="rounded vermelho w-50" id="pesquisar-botao" type="submit"
+                                data-bs-dismiss="modal">
+                                Buscar
+                            </button>
+
+                             <button type="button" class="btn btn-primary btn-limpar">Limpar</button>
+                        </div> -->
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- resultado da pesquisa -->
+    <main class="resultado-pesquisa d-flex justify-content-center align-content-start">
+        <button
+            class="resultado-pesquisa_voltar btn-voltar d-flex justify-content-center align-items-center m-0 p-0 mb-2 border-0 bg-transparent d-none">
+            <i class="bi bi-arrow-left-circle-fill me-2"></i>
+            <span>Voltar</span>
+        </button>
+
+
+        <section class="container text-center mb-5 mt-3">
+
+            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3" id="containerCardPadrao">
+
+                <!-- <div class="col">
+                    <a href="]#">
+                        <img src="/assets/demon slayer.jpeg" alt="" srcset="" class="">
+                    </a>
+                </div> -->
+
+            </div>
+
+        </section>
+
+
+        <section class="container text-center mb-5 ">
+
+            <div class="row row-cols-sm-2 row-cols-1 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3 mt-5 text-center text-danger w-100"
+                id="containerCardPesquisa">
+
+            </div>
+
+        </section>
+
+
+
+    </main>
+
+    <script src="/js/pesquisa.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+        integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+        crossorigin="anonymous"></script>
+</body>
+
+>>>>>>> 79291354032fd9697a07956186fe026b1c6d7087
 </html>
