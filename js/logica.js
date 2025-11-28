@@ -9,6 +9,7 @@ let valorBusca = ''
 pesquisarInput.forEach(input =>{
     input.addEventListener('input', ()=>{
         valorBusca = input.value
+        console.log(valorBusca);
 
         pesquisarInput.forEach(todosInputs =>{
             if (todosInputs !== input) {
@@ -23,6 +24,8 @@ pesquisaForm.forEach(form =>{
         e.preventDefault()
         const valorDigitado = valorBusca.trim().toLowerCase()
 
+        console.log(valorDigitado);
+        
         if (valorDigitado.length === 0) {
             alert("Digite algo no input")
             return
@@ -52,24 +55,6 @@ pesquisaForm.forEach(form =>{
     })
 
 })
-
-
-// tratar infors => html 
-// pesquisa por nome  - foca aquiii
-/* 
-- submit
-- pegar o input
-- tratar o input
-- enviar o input
-- try... catch
-
-*/
-
-
-
-
-
-
 
 
 
