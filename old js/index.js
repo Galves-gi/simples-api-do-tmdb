@@ -409,7 +409,4 @@ async function exibirGenerosFrontend(){
     // Inicializar os event listeners/opções do botão após criar os checkboxes
     pegarIdsGeneros();
 }
-<<<<<<< HEAD
->>>>>>>> 79291354032fd9697a07956186fe026b1c6d7087:js/index.js
-=======
->>>>>>> 79291354032fd9697a07956186fe026b1c6d7087
+

@@ -85,11 +85,11 @@ async function searchMovies(query, page = 1) {
 }
 
  
-async function discoverMovies({ genres = [], sortBy = 'popularity.desc', page = 1 } = {}) {
+async function discoverMovies(genres = [] ) { //, sortBy = 'popularity.desc', page = 1 } = {}
 
   const with_genres = genres.length ? genres.join(',') : undefined;
 
-  return apiGet('/discover/movie', { with_genres, sort_by: sortBy, page });
+  return apiGet('/discover/movie', { with_genres }); //, sort_by: sortBy, page
 
 }
  
