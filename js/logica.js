@@ -53,21 +53,19 @@ function pegarCheckboxSelecionado() {
 
     return Array.from(checkboxes).map(checkbox => checkbox.value)
 
-    // transforma checkboxes q é nodeList em um array (array.from), depois ele pode usar todos os metodos de array, como o map, que neste caso vai pegar cada valor de input marcado e enviar para return
+    // transforma checkboxes q é nodeList em um array (array.from), depois ele pode usar todos os métodos de array, como o map, que neste caso vai pegar cada valor de input marcado e enviar para return
 }
 
-// limpar os checkboxes selecionados
-function limparCheckboxSelcionado() {
-    const checkboxes = document.querySelectorAll('li[data-genero-checkbox] input[type="checkbox"]')
-    
-    return checkboxes.forEach(checkbox => checkbox.checked = false)
-}
-
+// pesquisar os filmes por generos
 async function pesquisarGeneros() {
     const idsGeneros = pegarCheckboxSelecionado()
 
     console.log(idsGeneros);
     containerFilmes.innerHTML = ''
+
+    if (idsGeneros.length === 0) {
+        return
+    }
 
     try {
         const dados = await discoverMovies(idsGeneros)
@@ -101,87 +99,66 @@ pesquisarInput.forEach(input =>{
 // pesquisa
 pesquisaForm.forEach(form =>{ // cada form
     form.addEventListener('submit',  async (e)=>{
+
         e.preventDefault()
 
-        // condicao de pesquisa
         const valorDigitado = valorBusca.trim().toLowerCase()
         const valorGeneros = pegarCheckboxSelecionado()
 
-        console.log(valorGeneros);
-        console.log(valorDigitado);
+        containerFilmes.innerHTML = ""
 
-        if (valorDigitado.length < 0 && valorGeneros.length < 0) {
-            console.log('Digita algo');
-            
+        if (valorDigitado.length === 0 && valorGeneros.length === 0) {
+            alert('Digite ou seleciona gênero')
             return
         }
 
-        
-        pesquisarGeneros()
-        limparCheckboxSelcionado()
-        
-        if (valorDigitado.length === 0) {
-            alert("Digite algo no input")
-            return
-        }
-
-        containerFilmes.innerHTML = "Carregando...."
-        
         try {
-            const resultados = await searchMovies(valorDigitado) 
-            containerFilmes.innerHTML = ""
+            //filtro por nome
+            if (valorDigitado.length > 0 && valorGeneros.length === 0) {
 
-            resultados.results.forEach(cadaFilme => {
-                containerFilmes.appendChild(criarCardPadrao(cadaFilme))
-            });
+                const resultados = await searchMovies(valorDigitado) 
 
+                resultados.results.forEach(cadaFilme => {
+                    containerFilmes.appendChild(criarCardPadrao(cadaFilme))
+                });
+
+            // filtro somente por generos
+            }else if(valorDigitado.length === 0 && valorGeneros.length > 0) {
+                pesquisarGeneros()
+
+            //filtro cruzado
+            }else if (valorDigitado.length > 0 && valorGeneros.length > 0) {
+            
+                const resultados = await searchMovies(valorDigitado) 
+
+                const generos = new Set(valorGeneros.map(Number))
+
+                const resultadoFiltroCruzado = resultados.results.filter(filme => filme.genre_ids.some(idGenero => generos.has(idGenero)))
+
+                resultadoFiltroCruzado.forEach(cadaFilme => {
+                    containerFilmes.appendChild(criarCardPadrao(cadaFilme))
+                });
+                //console.log(resultadoFiltroCruzado);
+            }
             
         } catch (error) {
             containerFilmes.innerHTML = "Erro ao buscar o filme. Tente mais tarde."
             console.error(error);
-        }  
+        }
 
+        form.reset()
+        valorBusca = ""; // limpar o valor de input salvo
     })
 
 })
-/* 
-function exibirFilmes() {
-    FormularioPesquisar.addEventListener('submit', (event)=>{
-
-      event.preventDefault();
-
-      console.log('Gêneros selecionados:', generosSelecionados);
-      console.log('Valor input:', valorDigitado);
-
-      if (generosSelecionados.length > 0 && !valorDigitado) {
-          exibirGeneros(generosSelecionados);
-
-      } else if (valorDigitado && generosSelecionados.length === 0) {
-          pegarValorInput();
-
-      } else if (valorDigitado && generosSelecionados.length > 0) {
-          exibirGenerosComPesquisa(generosSelecionados, valorDigitado);
-
-      } else {
-          containerCardPesquisa.innerHTML = '<p class="aviso">Selecione gêneros ou pesquise um filme</p>';
-      }
-      })
-
-} */
 
 exibirGeneros()
 
-
-// funcao pesquisa por genero
-// exibir na tela getGenres - ok
-// pegar os selcionados
-// pesquisar por selecionados 
-
-
+// se tiver os dois pesquisa cruzada => pegar os resultado de cada e chamar outra função
 // pesquisar por 2 
 // if... else
 // 
 
-
+// busca por generos indo msm sem generos 
 // localStorage
 // funcao de aviso

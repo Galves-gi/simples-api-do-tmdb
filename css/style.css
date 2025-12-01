@@ -350,6 +350,9 @@ footer {
         font-size: 1.8em;
         display: inline;
     }
+    .col{
+        width: auto;
+    }
 }
 
 @media (min-width: 1024px) {
