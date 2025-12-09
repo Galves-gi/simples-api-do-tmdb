@@ -217,6 +217,7 @@ header .logo {
 
 .card img,
 .col img {
+    width: clamp(12.56em, 14vw, 15.063em);
     max-width: 100%;
     height: 45dvh;
     object-fit: cover;
@@ -224,7 +225,7 @@ header .logo {
 
 /* demais card com col */
 .col {
-    height: 45vh;
+    height: 45dvh;
 }
 
 /*pagina resultado da pesquisa */

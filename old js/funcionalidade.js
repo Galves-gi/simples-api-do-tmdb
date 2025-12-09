@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<<< HEAD:old js/funcionalidade.js
 const carrosseis = document.querySelectorAll(".carousel-container")
 
 carrosseis.forEach(container =>{

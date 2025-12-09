@@ -13,9 +13,11 @@ function criarCardPadrao(filme) {
     const cardPadrao = document.createElement('div')
     cardPadrao.classList.add('col')
 
+    const caminhoImg = filme.poster_path ? `${TMDB_IMG}${filme.poster_path}` : "/assets/favicon.png"
+
     cardPadrao.innerHTML = `
-        <a href="./pages/descricao.html?id=${filme.id}">
-            <img src="${TMDB_IMG}${filme.poster_path}" alt="${filme.title}">
+        <a href="descricao.html?id=${filme.id}">
+            <img src="${caminhoImg}" alt="${filme.title}">
         </a>
     `
     return cardPadrao
@@ -51,14 +53,18 @@ function pegarCheckboxSelecionado() {
     const checkboxes = document.querySelectorAll('li[data-genero-checkbox] input[type="checkbox"]:checked')
     //qtddGeneros.forEach(cada => cada.textContent = checkboxes.length)
 
-    return Array.from(checkboxes).map(checkbox => checkbox.value)
+    const listaCheckboxes = Array.from(checkboxes).map(checkbox => checkbox.value)
+
+    localStorage.setItem("listaCheckboxes", JSON.stringify(listaCheckboxes));
 
     // transforma checkboxes q é nodeList em um array (array.from), depois ele pode usar todos os métodos de array, como o map, que neste caso vai pegar cada valor de input marcado e enviar para return
 }
 
+
 // pesquisar os filmes por generos
 async function pesquisarGeneros() {
-    const idsGeneros = pegarCheckboxSelecionado()
+
+    const idsGeneros = JSON.parse(localStorage.getItem("listaCheckboxes"))//pegarCheckboxSelecionado()
 
     console.log(idsGeneros);
     containerFilmes.innerHTML = ''
@@ -85,7 +91,9 @@ async function pesquisarGeneros() {
 pesquisarInput.forEach(input =>{
 
     input.addEventListener('input', ()=>{
-        valorBusca = input.value
+        valorBusca = input.value.trim().toLowerCase()
+
+        localStorage.setItem("valorBusca", valorBusca)
         //console.log(valorBusca);
 
         pesquisarInput.forEach(todosInputs =>{
@@ -96,14 +104,32 @@ pesquisarInput.forEach(input =>{
     })
 })
 
+pesquisaForm.forEach(form => {
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        if (window.location.pathname !== "/pages/pesquisa.html") {
+            window.location.href = "/pages/pesquisa.html";
+            return;
+        }
+
+        TipoDeFiltro();
+    });
+});
+
+if (window.location.pathname === "/pages/pesquisa.html") {
+    TipoDeFiltro();
+}
+
+
 // pesquisa
-pesquisaForm.forEach(form =>{ // cada form
-    form.addEventListener('submit',  async (e)=>{
+async function TipoDeFiltro(){
 
-        e.preventDefault()
+        pegarCheckboxSelecionado()
 
-        const valorDigitado = valorBusca.trim().toLowerCase()
-        const valorGeneros = pegarCheckboxSelecionado()
+        const valorDigitado = localStorage.getItem("valorBusca") || ""
+
+        const valorGeneros = JSON.parse(localStorage.getItem("listaCheckboxes")) || []
 
         containerFilmes.innerHTML = ""
 
@@ -145,20 +171,9 @@ pesquisaForm.forEach(form =>{ // cada form
             containerFilmes.innerHTML = "Erro ao buscar o filme. Tente mais tarde."
             console.error(error);
         }
-
-        form.reset()
-        valorBusca = ""; // limpar o valor de input salvo
-    })
-
-})
+        // limpar inputs e localStorage
+        //e.target.reset()
+        localStorage.clear()
+}
 
 exibirGeneros()
-
-// se tiver os dois pesquisa cruzada => pegar os resultado de cada e chamar outra função
-// pesquisar por 2 
-// if... else
-// 
-
-// busca por generos indo msm sem generos 
-// localStorage
-// funcao de aviso
